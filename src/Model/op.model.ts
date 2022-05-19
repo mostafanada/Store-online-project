@@ -40,4 +40,27 @@ export class DashboardQueries {
       );
     }
   }
+  async index(): Promise<order_products[]> {
+    try {
+      const conn = await client.connect();
+      const sql = `SELECT * FROM order_products`;
+      const result = await conn.query(sql);
+      conn.release();
+      return result.rows;
+    } catch (err) {
+      throw new Error(`connet get user ${err}`);
+    }
+  }
+  async delete(id: string): Promise<order_products> {
+    try {
+      const conn = await client.connect();
+      const sql = "DELETE FROM order_products WHERE id=($1)";
+      const result = await conn.query(sql, [id]);
+      const users = result.rows[0] as order_products;
+      conn.release();
+      return users;
+    } catch (err) {
+      throw new Error(`connet get user ${err}`);
+    }
+  }
 }
