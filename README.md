@@ -1,17 +1,4 @@
 # Store-online-project
-___Table of Contents___
-
-- [Storefront Backend Project](#storefront-backend-project)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installing](#installing)
-    - [Setup environment](#setup-environment)
-  - [Running the server](#running-the-application)
-  - [Running the tests](#running-the-unit-tests)
-  - [Built With](#built-with)
-  - [Endpoints](#endpoints)
-  - [Database Schema](#database-schema)
-
 
 A Store online API written in NodeJS for Udacity. This application has APIs for Users, Products, and Orders.
 ## Getting Started
@@ -58,16 +45,16 @@ Next, start the Postgres server:
 npm run start
 ```
 
-Now, check if Postgres has the database `database_dev`, if not create it:
+Now, create the database
+
 
 ```bash
 
 
 # Postgres shell
-# This will list out all the databases
-\l
-# If "database_dev" database is not present
-create database database_dev; 
+create database  store; 
+create database  store_t;
+
 ```
 
 Next, you need to run the database migrations:
