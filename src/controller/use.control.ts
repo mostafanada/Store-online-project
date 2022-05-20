@@ -22,7 +22,7 @@ console.log(`control`);
 userRoutes.get("/users", verifyAuthToken, index);
 userRoutes.get("/users/:id", verifyAuthToken, show);
 userRoutes.put("/users/:id", verifyAuthToken, update);
-userRoutes.post("/users", verifyAuthToken, create);
+userRoutes.post("/users", create);
 userRoutes.delete("/users/:id", verifyAuthToken, destroy);
 userRoutes.route("/login").post(login);
 

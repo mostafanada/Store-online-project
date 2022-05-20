@@ -10,10 +10,7 @@
     "resetdb": "db-migrate --env test reset",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --config .prettierrc.json --write \"src/**/*.ts\" ",
-    "test": "set ENV=test&& npx db-migrate --env test up&& jasmine &&npx db-migrate --env test reset",
-    "testdb": "set ENV=test&&db-migrate --env test up&&tsc&&jasmine&&db-migrate --env test reset",
-    "testd": "set ENV=test  && db-migrate up --config ./database.json -e test && tsc && npm run jasmine && db-migrate down",
-    "testj": "npm run build && npm run jasmine"
+    "test": "set ENV=test&& npx db-migrate --env test up&& jasmine &&npx db-migrate --env test reset"
   },
   "keywords": [],
   "author": "",
