@@ -1,5 +1,5 @@
-import client from "../database";
-import { user, userstore } from "../Model/user.model";
+import client from "../../database";
+import { user, userstore } from "../../Model/user.model";
 
 const store = new userstore();
 let user_test: user;
@@ -22,13 +22,13 @@ describe("User Model", () => {
       expect(store.delete).toBeDefined();
     });
   });
-  // afterAll(async () => {
-  //   const conn = await client.connect();
-  //   const sql =
-  //     'DELETE FROM order_products;\nDELETE FROM orders;\nDELETE FROM products;\nDELETE FROM users;';
-  //   await conn.query(sql);
-  //   conn.release();
-  // });
+  afterAll(async () => {
+    const conn = await client.connect();
+    const sql =
+      'DELETE FROM order_products;\nDELETE FROM orders;\nDELETE FROM products;\nDELETE FROM users;';
+    await conn.query(sql);
+    conn.release();
+  });
   it("add a user", async () => {
     const result = await store.create({
       first_name: "Mostafa",

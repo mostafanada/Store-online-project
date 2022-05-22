@@ -1,8 +1,8 @@
-import { user, userstore } from "../Model/user.model";
-import { product, productstore } from "../Model/product.model";
-import { order, orderstore } from "../Model/order.model";
-import { order_products, DashboardQueries } from "../Model/op.model";
-import client from "../database";
+import { user, userstore } from "../../Model/user.model";
+import { product, productstore } from "../../Model/product.model";
+import { order, orderstore } from "../../Model/order.model";
+import { order_products, DashboardQueries } from "../../Model/op.model";
+import client from "../../database";
 const userTestModel = new userstore();
 const productTestModel = new productstore();
 const orderTestModel = new orderstore();
