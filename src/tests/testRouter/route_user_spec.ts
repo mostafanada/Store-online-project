@@ -9,12 +9,12 @@ let token: string = '';
 
 describe('User API Endpoints', () => {
   beforeAll(async () => {
-    const user:user = {
-      username: 'testUser',
-      first_name: 'Test',
-      last_name: 'User',
-      password_digest: 'test123'
-    } ;
+    const user :user= {
+      username: 'MostafaNada',
+      first_name: 'Mostafa',
+      last_name: 'Nada',
+      password_digest: '12345'
+  } ;
 
     await userModel.create(user);
   });
@@ -26,13 +26,13 @@ describe('User API Endpoints', () => {
     connection.release();
   });
   describe('Test Authenticate method', () => {
-    it('should be able to authenticate to get token', async () => {
+    it('Get token', async () => {
       const res = await request
         .post('/login')
         .set('Content-type', 'application/json')
         .send({
-          username: 'testUser',
-          password_digest: 'test123'
+          username: 'MostafaNada',
+          password_digest: '12345'
         });
       expect(res.status).toBe(200);
       token = res.body;
@@ -42,7 +42,7 @@ describe('User API Endpoints', () => {
   });
 
   describe('Test CRUD API methods', () => {
-    it('should create new user', async () => {
+    it('Create new user', async () => {
       const res = await request
         .post('/users')
         .set('Content-type', 'application/json')

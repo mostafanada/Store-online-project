@@ -12,18 +12,18 @@ const orderModel = new orderstore();
 const request = supertest(app);
 let token: string = '';
 
-describe('Order Product API Endpoints', () => {
+describe('Order_Product API Endpoints', () => {
     const user :user= {
-        username: 'testUser',
-        first_name: 'Test',
-        last_name: 'User',
-        password_digest: 'test123'
+        username: 'MostafaNada',
+        first_name: 'Mostafa',
+        last_name: 'Nada',
+        password_digest: '12345'
     } ;
 
   const product:product = {
-    name: 'product name',
+    name: 'Test name',
     price: 9,
-    category: 'Electronics.'
+    category: 'hhh'
   } ;
 
   const order:order = {
@@ -39,9 +39,7 @@ describe('Order Product API Endpoints', () => {
 
   beforeAll(async () => {
     await userModel.create(user);
-    // await productModel.create(product);
-    // await orderModel.create(order);
-  });
+   });
 
   afterAll(async () => {
     const connection = await db.connect();
@@ -52,21 +50,21 @@ describe('Order Product API Endpoints', () => {
   });
 
   describe('Test Authenticate method', () => {
-    it('should be able to authenticate to get token', async () => {
+    it('Get token', async () => {
         const res = await request
           .post('/login')
           .set('Content-type', 'application/json')
           .send({
-            username: 'testUser',
-            password_digest: 'test123'
+            username: 'MostafaNada',
+          password_digest: '12345'
           });
         expect(res.status).toBe(200);
         token = res.body;
         // console.log(token);
       });
   });
-  describe('Test CRUD API methods', () => {
-    it('Get product', async () => {
+  describe('CRUD API methods', () => {
+    it('Get order_in_product', async () => {
       const res = await request
         .get('/order_in_product')
         .set('Content-type', 'application/json')

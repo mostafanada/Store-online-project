@@ -10,10 +10,10 @@ let token: string = '';
 describe('Products API Endpoints', () => {
   beforeAll(async () => {
     const user :user= {
-        username: 'testUser',
-        first_name: 'Test',
-        last_name: 'User',
-        password_digest: 'test123'
+        username: 'MostafaNada',
+        first_name: 'Mostafa',
+        last_name: 'Nada',
+        password_digest: '12345'
     } ;
 
     await userModel.create(user);
@@ -27,13 +27,13 @@ describe('Products API Endpoints', () => {
     connection.release();
   });
   describe('Test Authenticate method', () => {
-    it('should be able to authenticate to get token', async () => {
+    it('Get token', async () => {
         const res = await request
           .post('/login')
           .set('Content-type', 'application/json')
           .send({
-            username: 'testUser',
-            password_digest: 'test123'
+            username: 'MostafaNada',
+          password_digest: '12345'
           });
         expect(res.status).toBe(200);
         token = res.body;
