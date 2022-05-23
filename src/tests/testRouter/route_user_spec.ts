@@ -1,31 +1,30 @@
 import supertest from 'supertest';
-import client from '../../database';
+import {user,userstore} from '../../Model/user.model';
 import app from '../../index';
-import { user,userstore } from '../../Model/user.model';
+import client from '../../database';
 
-const userModel = new userstore();
+const userTest = new userstore();
 const request = supertest(app);
 let token: string = '';
 
-describe('User API Endpoints', () => {
+describe('User Endpoints', () => {
   beforeAll(async () => {
-    const user :user= {
-      username: 'MostafaNada',
+    const user:user = {
       first_name: 'Mostafa',
       last_name: 'Nada',
-      password_digest: '12345'
-  } ;
+      username: 'MostafaNada',
+      password_digest: '12345',
+    };
 
-    await userModel.create(user);
+    await userTest.create(user);
   });
-  afterAll(async () => {
-    // clean db
-    const connection = await client.connect();
-    const sql = 'DELETE FROM users;\nALTER SEQUENCE users_id_seq RESTART WITH 1';
-    await connection.query(sql);
-    connection.release();
-  });
-  describe('Test Authenticate method', () => {
+  // afterAll(async () => {
+  //   const conn = await client.connect();
+  //   const sql = 'DELETE FROM users;\nALTER SEQUENCE users_id_seq RESTART WITH 1';
+  //   await conn.query(sql);
+  //   conn.release();
+  // });
+  describe('Login method', () => {
     it('Get token', async () => {
       const res = await request
         .post('/login')
@@ -35,30 +34,57 @@ describe('User API Endpoints', () => {
           password_digest: '12345'
         });
       expect(res.status).toBe(200);
-      token = res.body;
-      // console.log(token);
+      token = res.body as unknown as string;
+      
     });
-
   });
 
-  describe('Test CRUD API methods', () => {
+  describe('CRUD methods', () => {
     it('Create new user', async () => {
       const res = await request
         .post('/users')
         .set('Content-type', 'application/json')
         .set('Authorization', `Bearer ${token}`)
         .send({
-          username: 'testUser2',
-          first_name: 'Test2',
-          last_name: 'User2',
-          password_digest: 'test123'
+          first_name: 'sasa',
+          last_name: 'Nada',
+          username: 'sasaNada',
+          password_digest: '12345',
         });
       expect(res.status).toBe(200);
       
-      const {username,first_name,last_name } = res.body;
-      expect(username).toBe('testUser2');
-      expect(first_name).toBe('Test2');
-      expect(last_name).toBe('User2');
     });
+
+    
+    it('Get all of users', async () => {
+      const res = await request
+      .get('/users')
+      .set('Content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+      expect(res.status).toBe(200);
+    });
+    
+    it('Get spasific user', async () => {
+      const res = await request
+      .get('/users/1')
+      .set('Content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+      expect(res.status).toBe(200);
+    });
+    
+    it('Update user info', async () => {
+      const res = await request
+      .put('/users/1')
+      .set('Content-type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        first_name: 'Mostafasasa',
+        last_name: 'Nada',
+        username: 'Mostafasasa',
+        password_digest: '12345',
+      });
+      expect(res.status).toBe(200);
+      
+      });
   });
 });
