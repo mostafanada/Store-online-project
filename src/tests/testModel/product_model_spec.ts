@@ -60,7 +60,7 @@ describe("Product Model", () => {
     });
 
     it("List of product", async () => {
-      const products = await orderTestModel.index();
+      const products = await productTestModel.index();
       expect(products.length).toBeGreaterThan(0);
     });
 
